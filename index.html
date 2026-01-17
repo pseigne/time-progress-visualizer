@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year-Progress</title>
+
+    <script type="module" src="js/engine.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+
+<body>
+
+
+    <div class="main-container">
+
+        <h1 id="year"></h1>
+
+        <div id="days-container">
+            <span class="day"></span>
+        </div>
+        <h4>Year Progress: <span id="year-progress"></span></h4>
+    </div>
+
+    <div class="button-container">
+        <button id="month-btn" onclick="monthButton()">Month</button>
+        <button id="year-btn" onclick="yearButton()">Year</button>
+        <button id="decade-btn" onclick="decade()">Decade</button>
+        <button id="century-btn" onclick="century()">Century</button>
+        <button id="millennium-btn" onclick="millennium()">Millennium</button>
+    </div>
+</body>
+
+</html>
