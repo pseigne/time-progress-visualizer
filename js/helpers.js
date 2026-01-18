@@ -31,3 +31,6 @@ export function calculatePercentage(daysElasped, timeLength) {
 export function getStartOfPeriod(currentYear, periodLength) {
     return Math.floor(currentYear / periodLength) * periodLength;
 }
+
+
+

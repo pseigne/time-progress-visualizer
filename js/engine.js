@@ -4,6 +4,9 @@ import { displayDots, clearDots } from './ui.js';
 const today = new Date();
 
 window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("year").innerHTML = today.getFullYear();
+    document.getElementById("interval-name").innerHTML = "Year"
+
     year(today);
 
     // expose handlers for inline `onclick` attributes
@@ -16,14 +19,13 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function year(today) {
+
     const janFirst = new Date(`${today.getFullYear()}-1-1`);
     let year_length = checkYear(today.getFullYear()) ? 366 : 365;
 
     // Check the length of the year (leap year or not)
     let daysElasped = calculateDaysElasped(today, janFirst);
 
-    // Display the year
-    document.getElementById("year").innerHTML = (today.getFullYear());
     // Display the year progress 
     document.getElementById("year-progress").innerHTML = calculatePercentage(daysElasped, year_length).toFixed(2) + "%";
     displayDots(daysElasped, year_length);
@@ -34,6 +36,8 @@ function decade() {
     clearDots()
     // current year, start of decade, length of decade (years)
     decadePlus(10)
+    document.getElementById("interval-name").innerHTML = "Decade"
+
 
 
 }
@@ -50,8 +54,6 @@ function decadePlus(yearsInPeriod) {
 
     // Get the start of the time period
     let startOfTimePeriod = getStartOfPeriod(currentYear, yearsInPeriod);
-
-
 
     let daysElasped = 0;
 
@@ -77,6 +79,7 @@ function decadePlus(yearsInPeriod) {
 
 
     document.getElementById("year-progress").innerHTML = calculatePercentage(daysElasped, periodLength).toFixed(2) + "%";
+    document.getElementById("year").innerHTML = startOfTimePeriod + 's';
 
 }
 
@@ -86,12 +89,18 @@ function century() {
     clearDots()
     // current year, start of decade, length of decade (years)
     decadePlus(100)
+    document.getElementById("interval-name").innerHTML = "Century"
+
 
 }
 
 function yearButton() {
     clearDots();
+    document.getElementById("year").innerHTML = today.getFullYear();
+    document.getElementById("interval-name").innerHTML = "Year"
+
     year(today);
+
 }
 
 function monthButton() {
@@ -100,13 +109,20 @@ function monthButton() {
     const monthLength = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     const daysInMonthElapsed = today.getDate() - 1;
 
+
     document.getElementById("year").innerHTML = `${today.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`;
     document.getElementById("year-progress").innerHTML = calculatePercentage(daysInMonthElapsed, monthLength).toFixed(2) + "%";
+
+    document.getElementById("interval-name").innerHTML = "Month"
     displayDots(daysInMonthElapsed, monthLength);
 }
 
 function millennium() {
     clearDots()
     // current year, start of decade, length of decade (years)
+
+
     decadePlus(1000)
+    document.getElementById("interval-name").innerHTML = "Millennium"
+
 }
