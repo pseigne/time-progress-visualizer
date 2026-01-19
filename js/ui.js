@@ -6,36 +6,26 @@ export function clearDots() {
     if (el) el.innerHTML = '';
 }
 
-export function displayDots(daysElasped, year_length) {
+export function displayDots(daysElapsed, year_length) {
     const container = document.getElementById("days-container");
-    const progressBar = document.getElementById("progress");
+    if (!container) return;
 
-    // For all days in the year, create a dot 
+    // 1. Create a DocumentFragment (an off-screen container)
+    const fragment = document.createDocumentFragment();
+
     for (let i = 0; i < year_length; i++) {
-
-
-        // if the dot is before the current date it is red
         const day = document.createElement('span');
 
-        if (i < daysElasped) {
-            // daysHTML += `<span class="day elapsed"></span>`
-            day.setAttribute("class", "day elapsed");
-        } else {
-            // else make it gray 
-            day.setAttribute("class", "day");
-            // daysHTML += `<span class="day"></span>`;
-        }
+        // 2. Use .className instead of setAttribute (slightly faster)
+        // 3. Ternary operator for cleaner logic
+        day.className = i < daysElapsed ? "day elapsed" : "day";
 
-        // Add to DOM
-        if (container) {
-            container.appendChild(day);
-        }
+        // 4. Append to the fragment, NOT the actual DOM
+        fragment.appendChild(day);
     }
 
-    
-    // Insert the HTML there 
-    // document.getElementById("days-container").innerHTML = daysHTML;
-
+    // 5. Append the fragment to the DOM (This triggers only ONE reflow)
+    container.appendChild(fragment);
 }
 
 
@@ -68,13 +58,11 @@ export function fitDotsToScreen() {
 
 
 export function displayYearAndMonth(daysElasped, year_length) {
-    // Clear existing dots so month/year views do not stack
-    clearDots();
-
-    // Use fixed sizing for month/year view
+    
     document.documentElement.style.setProperty('--dot-size', '15px');
     document.documentElement.style.setProperty('--dot-margin', '5px');
 
-    // Render dots fresh
-    displayDots(daysElasped, year_length);
+    
+    displayDots(daysElasped, year_length)
+
 }

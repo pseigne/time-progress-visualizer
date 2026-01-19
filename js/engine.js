@@ -64,14 +64,16 @@ function decadePlus(yearsInPeriod) {
         // get year at start of decade 
         let yearLength = checkYear(yearInProgress) ? 366 : 365;
         periodLength += yearLength;
-        // If the year in progress is equal to the current year 
+        // If the year in progress is before the current year, show all days elapsed
         if (yearInProgress < currentYear) {
             displayDots(yearLength, yearLength);
             daysElasped += yearLength;
         } else if (yearInProgress == currentYear) {
+            // For current year, show only days elapsed so far
             daysElasped += year(today);
         }
         else {
+            // For future years, show no days elapsed
             displayDots(0, yearLength)
         }
 
